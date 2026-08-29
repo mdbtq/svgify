@@ -1,0 +1,12 @@
+trace
+Copyright (C) 2026 the trace authors
+
+This program is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License version 2, as published by the
+Free Software Foundation. See LICENSE.
+
+This program incorporates github.com/dennwc/gotrace (vendored under
+vendor/github.com/dennwc/gotrace), a Go port of Potrace by Denys Smirnov,
+licensed under the GNU General Public License version 2.
+
+Potrace is Copyright (C) 2001-2019 Peter Selinger.
