@@ -21,11 +21,11 @@ go install github.com/mdbtq/trace/cmd/trace@latest
 Or from a clone:
 
 ```console
-make install
+make build/install
 ```
 
 Pre-built binaries can be produced for every supported platform with
-`make dist` (macOS arm64/amd64, Linux amd64/arm64, Windows amd64).
+`make build/dist` (macOS arm64/amd64, Linux amd64/arm64, Windows amd64).
 
 There are **no native or runtime dependencies**. The tracer is pure Go, so the
 result is a single static binary (~2.3 MB) that needs no C toolchain to build
@@ -130,7 +130,7 @@ go build ./...
 go test ./...
 ```
 
-or `make build`, `make test`, `make lint`, `make dist`.
+or `make build`, `make test`, `make lint`, `make build/dist`.
 
 Test fixtures are generated in code rather than checked in as binaries; see
 `internal/testfixtures`. They cover black-on-white, white-on-black, transparent

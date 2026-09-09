@@ -8,28 +8,27 @@ export CGO_ENABLED = 0
 
 PLATFORMS := darwin/arm64 darwin/amd64 linux/amd64 linux/arm64 windows/amd64
 
-.PHONY: build test install clean fmt vet lint dist
+.DEFAULT_GOAL := help
 
-build:
+.PHONY: help
+help: ## Show this help
+	@awk 'BEGIN {FS = ":.*?## "} \
+		/^##@ / {printf "  \033[1m%s\033[0m\n", substr($$0, 5); next} \
+		/^[a-zA-Z0-9_\/.-]+:.*?## / {printf "  \033[36m%-16s\033[0m %s\n", $$1, $$2}' \
+		$(MAKEFILE_LIST)
+
+##@ Build
+
+.PHONY: build/binary
+build/binary: ## Build the binary into bin/
 	go build -ldflags '$(LDFLAGS)' -o bin/$(BINARY) $(PKG)
 
-test:
-	go test ./...
-
-install:
+.PHONY: build/install
+build/install: ## Install the binary with go install
 	go install -ldflags '$(LDFLAGS)' $(PKG)
 
-fmt:
-	gofmt -l -w .
-
-vet:
-	go vet ./...
-
-lint: vet
-	@test -z "$$(gofmt -l . | grep -v '^vendor/')" || { echo 'gofmt needed:'; gofmt -l . | grep -v '^vendor/'; exit 1; }
-
-# Cross-compile release binaries for every supported target.
-dist:
+.PHONY: build/dist
+build/dist: ## Cross-compile release binaries for every supported target
 	@rm -rf dist && mkdir -p dist
 	@for p in $(PLATFORMS); do \
 		os=$${p%/*}; arch=$${p#*/}; ext=''; \
@@ -40,5 +39,37 @@ dist:
 	done
 	@ls -lh dist
 
-clean:
+.PHONY: build/clean
+build/clean: ## Remove build artefacts
 	rm -rf bin dist
+
+##@ Test
+
+.PHONY: test/all
+test/all: ## Run the test suite
+	go test ./...
+
+##@ Lint
+
+.PHONY: lint/fmt
+lint/fmt: ## Format the source
+	gofmt -l -w .
+
+.PHONY: lint/vet
+lint/vet: ## Run go vet
+	go vet ./...
+
+.PHONY: lint/check
+lint/check: lint/vet ## Run vet and check formatting without changing files
+	@test -z "$$(gofmt -l . | grep -v '^vendor/')" || { echo 'gofmt needed:'; gofmt -l . | grep -v '^vendor/'; exit 1; }
+
+# Deprecated aliases, kept so existing habits and scripts keep working.
+# They carry no ## comment, so `make help` lists only the names above.
+.PHONY: build install dist clean fmt vet lint
+build: build/binary
+install: build/install
+dist: build/dist
+clean: build/clean
+fmt: lint/fmt
+vet: lint/vet
+lint: lint/check
