@@ -130,7 +130,7 @@ go build ./...
 go test ./...
 ```
 
-or `make build`, `make test`, `make lint`, `make build/dist`.
+or `make build/binary`, `make test/all`, `make lint/check`, `make build/dist`.
 
 Test fixtures are generated in code rather than checked in as binaries; see
 `internal/testfixtures`. They cover black-on-white, white-on-black, transparent
