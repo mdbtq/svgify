@@ -1,4 +1,4 @@
-// Command trace converts raster images into tightly cropped SVG vector graphics.
+// Command svgify converts raster images into tightly cropped SVG vector graphics.
 package main
 
 import (
@@ -10,7 +10,7 @@ import (
 func main() {
 	if err := run(os.Args[1:], os.Stdout, os.Stderr); err != nil {
 		if !errors.Is(err, errUsage) {
-			fmt.Fprintln(os.Stderr, "trace:", err)
+			fmt.Fprintln(os.Stderr, "svgify:", err)
 		}
 		os.Exit(exitCode(err))
 	}

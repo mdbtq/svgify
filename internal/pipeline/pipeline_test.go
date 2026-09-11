@@ -12,11 +12,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/mdbtq/trace/internal/preprocess"
-	"github.com/mdbtq/trace/internal/raster"
-	"github.com/mdbtq/trace/internal/svg"
-	"github.com/mdbtq/trace/internal/testfixtures"
-	"github.com/mdbtq/trace/internal/trace"
+	"github.com/mdbtq/svgify/internal/preprocess"
+	"github.com/mdbtq/svgify/internal/raster"
+	"github.com/mdbtq/svgify/internal/svg"
+	"github.com/mdbtq/svgify/internal/testfixtures"
+	"github.com/mdbtq/svgify/internal/trace"
 )
 
 // convert runs the full pipeline over a fixture.

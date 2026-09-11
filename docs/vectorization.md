@@ -2,7 +2,7 @@
 
 ## Decision
 
-`trace` uses **[github.com/dennwc/gotrace](https://github.com/dennwc/gotrace)**,
+`svgify` uses **[github.com/dennwc/gotrace](https://github.com/dennwc/gotrace)**,
 a pure-Go port of the Potrace algorithm, linked as a library.
 
 ## Why not VTracer
@@ -43,7 +43,7 @@ Verified properties:
 ## Licensing consequence
 
 Potrace is GPLv2, and so is this port. Linking it makes the resulting binary a
-derivative work, so **`trace` is distributed under GPLv2**. This is the same
+derivative work, so **`svgify` is distributed under GPLv2**. This is the same
 position Inkscape and every other Potrace-based tool is in.
 
 If a permissive licence is ever required, the replacement options are to

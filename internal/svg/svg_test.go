@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/mdbtq/trace/internal/trace"
+	"github.com/mdbtq/svgify/internal/trace"
 )
 
 // square returns a unit-square contour at the given offset.

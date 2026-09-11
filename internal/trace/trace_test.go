@@ -4,7 +4,7 @@ import (
 	"math"
 	"testing"
 
-	"github.com/mdbtq/trace/internal/preprocess"
+	"github.com/mdbtq/svgify/internal/preprocess"
 )
 
 func TestRunTracesASquare(t *testing.T) {

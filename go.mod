@@ -1,4 +1,4 @@
-module github.com/mdbtq/trace
+module github.com/mdbtq/svgify
 
 go 1.25.0
 

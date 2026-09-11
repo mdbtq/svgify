@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/mdbtq/trace/internal/testfixtures"
+	"github.com/mdbtq/svgify/internal/testfixtures"
 )
 
 // writeFixture puts a fixture PNG in a temp dir and returns its path.
@@ -123,7 +123,7 @@ func TestVersion(t *testing.T) {
 	if err := run([]string{"--version"}, &out, io_Discard()); err != nil {
 		t.Fatal(err)
 	}
-	if !strings.HasPrefix(out.String(), "trace ") {
+	if !strings.HasPrefix(out.String(), "svgify ") {
 		t.Errorf("version output = %q", out.String())
 	}
 }

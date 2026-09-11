@@ -5,7 +5,7 @@ package preprocess
 import (
 	"image"
 
-	"github.com/mdbtq/trace/internal/raster"
+	"github.com/mdbtq/svgify/internal/raster"
 )
 
 // Bitmap is a binary image where true means foreground (ink).

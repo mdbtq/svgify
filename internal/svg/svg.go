@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/mdbtq/trace/internal/trace"
+	"github.com/mdbtq/svgify/internal/trace"
 )
 
 // Options controls SVG serialization.

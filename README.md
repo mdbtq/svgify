@@ -1,9 +1,9 @@
-# trace
+# svgify
 
 Convert raster images into clean, tightly cropped SVG vector graphics.
 
 ```console
-$ trace logo.png
+$ svgify logo.png
 ```
 
 writes `logo.svg`: a single flat path, smooth Bézier curves, holes preserved,
@@ -15,7 +15,7 @@ command and a good result, not a dialog full of sliders.
 ## Install
 
 ```console
-go install github.com/mdbtq/trace/cmd/trace@latest
+go install github.com/mdbtq/svgify/cmd/svgify@latest
 ```
 
 Or from a clone:
@@ -34,17 +34,17 @@ and no shared libraries to run.
 ## Examples
 
 ```console
-trace logo.png                      # -> logo.svg
-trace logo.png -o icon.svg          # explicit output
-trace logo.png -o -                 # write to stdout
-cat logo.png | trace - -o out.svg   # read from stdin
+svgify logo.png                      # -> logo.svg
+svgify logo.png -o icon.svg          # explicit output
+svgify logo.png -o -                 # write to stdout
+cat logo.png | svgify - -o out.svg   # read from stdin
 
-trace scan.jpg --threshold 160      # override automatic thresholding
-trace photo.png --invert            # swap foreground and background
-trace mark.png --padding 4          # breathing room around the artwork
-trace rough.png --simplify 1.5      # smoother, fewer segments
-trace art.png --no-crop             # keep the original canvas
-trace logo.png --foreground '#e11'  # colour the output
+svgify scan.jpg --threshold 160      # override automatic thresholding
+svgify photo.png --invert            # swap foreground and background
+svgify mark.png --padding 4          # breathing room around the artwork
+svgify rough.png --simplify 1.5      # smoother, fewer segments
+svgify art.png --no-crop             # keep the original canvas
+svgify logo.png --foreground '#e11'  # colour the output
 ```
 
 ## Options
@@ -72,7 +72,7 @@ PNG, JPEG and WebP in; SVG out. Alpha is read and used where present.
 
 ## How the automatic tracing works
 
-The aim is that `trace logo.png` is right often enough that the flags stay
+The aim is that `svgify logo.png` is right often enough that the flags stay
 unused. The pipeline is:
 
 1. **Decode** to straight (non-premultiplied) RGBA.
@@ -106,14 +106,14 @@ you put it in. There are no groups, no transforms and no metadata.
 ### When to reach for a flag
 
 - The result is a filled box → the background was misread. Try `--invert`.
-  `trace` warns on stderr when the trace comes out almost entirely solid.
+  `svgify` warns on stderr when the trace comes out almost entirely solid.
 - Detail is lost or noise is kept → set `--threshold` explicitly.
 - Edges are wobbly → raise `--simplify`. Fine detail is being lost → lower it.
 
 ## Behaviour
 
 Conventional Unix behaviour: silent on success, errors on stderr, exit `0` on
-success, `1` on failure, `2` on misuse. `trace` will not overwrite its own
+success, `1` on failure, `2` on misuse. `svgify` will not overwrite its own
 input, and will not overwrite an existing output without `-f`.
 
 ## Colour
@@ -139,7 +139,7 @@ low-contrast grey artwork.
 
 ## Licence
 
-GPL-2.0. `trace` links [dennwc/gotrace][gotrace], a Go port of Potrace, which
+GPL-2.0. `svgify` links [dennwc/gotrace][gotrace], a Go port of Potrace, which
 is GPL-2.0; a binary linking it is a derivative work. The dependency is
 vendored under `vendor/`. See [LICENSE](LICENSE), [NOTICE](NOTICE) and
 [docs/vectorization.md](docs/vectorization.md) for the reasoning.

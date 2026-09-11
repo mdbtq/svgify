@@ -4,7 +4,7 @@ import (
 	"image/jpeg"
 	"io"
 
-	"github.com/mdbtq/trace/internal/testfixtures"
+	"github.com/mdbtq/svgify/internal/testfixtures"
 )
 
 func jpegEncode(w io.Writer, f testfixtures.Fixture) error {

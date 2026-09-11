@@ -11,7 +11,7 @@ import (
 
 	"github.com/dennwc/gotrace"
 
-	"github.com/mdbtq/trace/internal/preprocess"
+	"github.com/mdbtq/svgify/internal/preprocess"
 )
 
 // Point is a coordinate in source-image pixel space.

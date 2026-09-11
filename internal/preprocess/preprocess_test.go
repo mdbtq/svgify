@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/mdbtq/trace/internal/raster"
-	"github.com/mdbtq/trace/internal/testfixtures"
+	"github.com/mdbtq/svgify/internal/raster"
+	"github.com/mdbtq/svgify/internal/testfixtures"
 )
 
 func decode(t *testing.T, f testfixtures.Fixture) *raster.Image {

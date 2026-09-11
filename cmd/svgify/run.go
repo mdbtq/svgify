@@ -9,10 +9,10 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/mdbtq/trace/internal/preprocess"
-	"github.com/mdbtq/trace/internal/raster"
-	"github.com/mdbtq/trace/internal/svg"
-	"github.com/mdbtq/trace/internal/trace"
+	"github.com/mdbtq/svgify/internal/preprocess"
+	"github.com/mdbtq/svgify/internal/raster"
+	"github.com/mdbtq/svgify/internal/svg"
+	"github.com/mdbtq/svgify/internal/trace"
 )
 
 // version is overridden at build time via -ldflags.
@@ -61,7 +61,7 @@ type config struct {
 func run(args []string, stdout, stderr io.Writer) error {
 	var cfg config
 
-	fs := flag.NewFlagSet("trace", flag.ContinueOnError)
+	fs := flag.NewFlagSet("svgify", flag.ContinueOnError)
 	fs.SetOutput(stderr)
 	fs.StringVar(&cfg.output, "o", "", "output file, or - for stdout (default: input with .svg extension)")
 	fs.IntVar(&cfg.threshold, "threshold", -1, "brightness threshold 0-255 (default: automatic, via Otsu's method)")
@@ -86,7 +86,7 @@ func run(args []string, stdout, stderr io.Writer) error {
 	}
 
 	if cfg.showVer {
-		fmt.Fprintf(stdout, "trace %s\n", version)
+		fmt.Fprintf(stdout, "svgify %s\n", version)
 		return nil
 	}
 
@@ -120,7 +120,7 @@ func run(args []string, stdout, stderr io.Writer) error {
 		return err
 	}
 	if warn != "" && !cfg.quiet {
-		fmt.Fprintln(stderr, "trace: warning:", warn)
+		fmt.Fprintln(stderr, "svgify: warning:", warn)
 	}
 
 	return write(doc, out, cfg.force, stdout)
@@ -220,7 +220,7 @@ func write(doc, out string, force bool, stdout io.Writer) error {
 }
 
 // reorder moves operands after flags. Go's flag package stops parsing at the
-// first non-flag argument, but "trace logo.png -o out.svg" is the natural way
+// first non-flag argument, but "svgify logo.png -o out.svg" is the natural way
 // to invoke a one-argument tool, so accept flags on either side of the input.
 func reorder(args []string) []string {
 	// Flags that consume a following value, and so must keep it adjacent.
@@ -253,10 +253,10 @@ func reorder(args []string) []string {
 }
 
 func usage(w io.Writer) {
-	fmt.Fprint(w, `trace converts raster images into clean, tightly cropped SVG vector graphics.
+	fmt.Fprint(w, `svgify converts raster images into clean, tightly cropped SVG vector graphics.
 
 Usage:
-  trace [options] <input>
+  svgify [options] <input>
 
   Reads PNG, JPEG or WebP. Writes an SVG next to the input unless -o is given.
   Use - as the input or output to read stdin or write stdout.
@@ -276,9 +276,9 @@ Options:
   --version            print the version
 
 Examples:
-  trace logo.png
-  trace logo.png -o icon.svg
-  trace scan.jpg --threshold 160 --padding 4
-  trace photo.png --invert --simplify 1.5
+  svgify logo.png
+  svgify logo.png -o icon.svg
+  svgify scan.jpg --threshold 160 --padding 4
+  svgify photo.png --invert --simplify 1.5
 `)
 }
